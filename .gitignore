@@ -1,0 +1,12 @@
+# Quarto
+/.quarto/
+/_site/
+**/*.quarto_ipynb
+
+# Mac
+.DS_Store
+
+# R / Positron
+.Rhistory
+.RData
+.Rproj.user/

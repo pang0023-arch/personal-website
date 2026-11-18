@@ -1,0 +1,21 @@
+---
+title: "Pei Sin Ang"
+image: profile.jpeg
+about:
+  template: trestles
+  image-shape: round
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/pang0023-arch
+    - icon: youtube
+      text: Youtube
+      href: https://www.youtube.com/c/TheRightNudge
+
+---
+
+I'm a first-year student in the [Master of Business Analytics](https://www.monash.edu/business/master-of-business-analytics) at Monash University, coming to data from a slightly unusual path.
+
+I spent four years as a civil engineer and the last four advising property investors with [PropNex Singapore](https://www.propnex.com/). Most people in the industry approach it as sales, but I found myself drawn to the data side of things, and that's where I found my style. I compare developments, look at the numbers behind supply and demand, and help clients decide whether to buy, sell or hold, and how to optimise their portfolios. A big part of the job is turning those numbers into something clients can easily understand and act on. The more I worked with data, the more I wanted the technical skills to do it properly, and that's what brought me to analytics.
+
+These days I'm learning to explore, analyse and visualise data in R, and this site is where I share what I'm working on.

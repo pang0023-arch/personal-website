@@ -1,0 +1,186 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: "Space Grotesk", sans-serif;
+$headings-font-weight: 500;
+
+// Navbar text/icons: dark grey normally and on hover (no Cosmo blue)
+$navbar-fg: #272727;
+$navbar-hl: #272727;
+
+/*-- scss:rules --*/
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap');
+
+/* ---------- Page background: grey grid ---------- */
+body {
+  background-color: #EDEDED;
+  background-image:
+    linear-gradient(to right, #E0E0E0 1px, transparent 1px),
+    linear-gradient(to bottom, #E0E0E0 1px, transparent 1px);
+  background-size: 11px 11px;
+  background-attachment: fixed; // grid stays still while content scrolls
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}
+
+/* Name, icons and links: no colour change on hover */
+.navbar .navbar-brand:hover,
+.navbar .navbar-title:hover,
+.navbar .quarto-navigation-tool:hover,
+.navbar .bi:hover,
+.navbar .nav-link:hover {
+  color: #272727 !important;
+}
+
+/* Default: no pill */
+.navbar .navbar-nav .nav-link {
+  background-color: transparent;
+  border-radius: 40px;
+  padding: 0.5rem 1.5rem;
+  margin: 0 0.15rem;
+  color: #272727;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+/* Current page: light grey pill */
+.navbar .navbar-nav .nav-link.active {
+  background-color: #E2E2E2;
+  color: #272727;
+}
+
+/* Hover: slightly darker grey */
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active:hover {              
+  background-color: #D6D6D6;
+  color: #272727;
+}
+
+/* ---------- About page (trestles) ---------- */
+@media (min-width: 992px) {
+  div.quarto-about-trestles {
+    align-items: center; // intro text centred against photo column
+  }
+}
+
+div.quarto-about-trestles .about-contents {
+  border-left: none;
+}
+
+/* Link buttons under your name (e.g. Youtube): grey instead of blue on hover */
+div.quarto-about-trestles .about-link:hover {
+  color: #272727 !important;
+  border-color: #272727 !important;
+  background-color: #E2E2E2;
+}
+
+/* ---------- CV page ---------- */
+
+/* Each section: heading on the left, content on the right, line on top */
+.cv-section {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  column-gap: 2rem;
+  border-top: 1px solid #272727;
+  padding: 1.75rem 0;
+}
+
+.cv-section > * { grid-column: 2; }
+
+.cv-section > h2 {
+  grid-column: 1;
+  grid-row: 1 / span 99;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+}
+
+/* Job/degree title on the left, dates on the right */
+.cv-heading { margin-top: 1.25rem; }
+.cv-heading:first-of-type { margin-top: 0; }
+
+.cv-heading p {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.cv-date { white-space: nowrap; }
+
+.cv-org {
+  display: block;
+  color: #555555;
+}
+
+.cv-section ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.2rem;
+}
+
+/* Skills in two columns */
+.cv-skills ul { columns: 2; }
+
+/* Download PDF button: same pill style as the navbar */
+.btn-pill {
+  display: inline-block;
+  background-color: #E2E2E2;
+  border-radius: 40px;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #272727 !important;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-pill:hover {
+  background-color: #D6D6D6;
+  color: #272727 !important;
+  text-decoration: none;
+}
+
+/* Phones: stack the heading above the content */
+@media (max-width: 768px) {
+  .cv-section {
+    grid-template-columns: 1fr;
+  }
+  .cv-section > h2 {
+    grid-column: 1;
+    grid-row: auto;
+    margin-bottom: 0.75rem;
+  }
+  .cv-section > * { grid-column: 1; }
+}
+
+/* PDF: hide website parts and tighten spacing to fit one page */
+@media print {
+  #quarto-header, .navbar, #quarto-margin-sidebar, #TOC,
+  .quarto-alternate-formats, .btn-pill, .nav-footer, footer {
+    display: none !important;
+  }
+  #quarto-content, main.content {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  @page { size: A4; margin: 10mm 12mm; }
+
+  html { font-size: 13px !important; }
+  h1.title { margin-bottom: 0.2rem !important; }
+  .cv-section { margin: 0 !important; padding: 0.4rem 0 !important; }
+  .cv-section h2 { margin: 0.3rem 0 0.4rem !important; }
+  .cv-heading { margin-top: 0.4rem !important; }
+  ul { margin-bottom: 0.2rem !important; }
+  hr { margin: 0.5rem 0 !important; }
+}

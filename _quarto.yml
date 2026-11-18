@@ -1,0 +1,27 @@
+project:
+  type: website
+  resources:
+    - "fit5147_dvp_part2/**"
+
+website:
+  title: "Peisin Ang"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: blog.qmd
+        text: Blog
+      - href: cv.qmd
+        text: CV
+    right: 
+      - icon: github
+        href: https://github.com/pang0023-arch
+
+format:
+  html:
+    theme: [cosmo, custom.scss]
+    css: styles.css
+    toc: true
+
+
+

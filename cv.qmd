@@ -1,0 +1,80 @@
+---
+title: "Peisin Ang"
+subtitle: "0403 769 036 | [peisinang@gmail.com](peisinang@gmail.com) | Melbourne, Australia"
+toc: false
+format: html
+format-links: false
+resources:
+  - cv.pdf
+---
+
+[Download PDF](cv.pdf){.btn-pill download="cv.pdf"}
+
+:::: {.cv-section}
+## Summary
+
+I spent four years as a civil engineer and four years advising property investors, and along the way I noticed the best decisions were the ones backed by data. That led me to a Master of Business Analytics, where I’m building technical expertise in exploring, analysing and visualising data in R. Now I want to pair it with the business acumen and client communication skills I’ve developed over eight years of work.
+
+::::
+
+:::: {.cv-section}
+## Education
+
+::: {.cv-heading}
+[Master of Business Analytics, Monash University]{.cv-role} [2026 – Present]{.cv-date}
+:::
+
+::: {.cv-heading}
+[Graduate Diploma in Foundational Data Science, University of Melbourne]{.cv-role} [2025]{.cv-date}
+:::
+
+::: {.cv-heading}
+[B.Eng. (Civil Engineering) with Honours, National University of Singapore]{.cv-role} [2017]{.cv-date}
+:::
+::::
+
+:::: {.cv-section}
+## Projects & Achievements
+
+::: {.cv-heading}
+[2nd Place (of 9 teams), MBAT × SEC Victoria Datathon]{.cv-role} [2026]{.cv-date}
+:::
+
+- Text-mined 1,161 AI incidents in R (TF-IDF, LDA topic modelling, bigrams) to identify how AI tools fail in retail, wholesale and household electrification work.
+- Translated findings into six safeguards for SEC Victoria's internal AI rollout.
+::::
+
+:::: {.cv-section}
+## Work Experience
+
+::: {.cv-heading}
+[Associate Director, PropNex Realty Pte Ltd]{.cv-role} [2022 – Present]{.cv-date}
+:::
+- Analysed transaction data, price trends and financials (capital growth, rental yield, holding costs) to advise clients on whether to buy, sell or hold.
+- Optimised clients’ property portfolios to maximise investment potential, assessing risks such as market volatility, tenant turnover and economic downturns.
+
+::: {.cv-heading}
+[Executive Engineer, Land Transport Authority Singapore]{.cv-role} [2020 – 2022]{.cv-date}
+:::
+
+- Managed inventory data for Singapore's road assets (pavement, signals, signage, markings) to plan preventive and reactive maintenance.
+- Forecast maintenance costs to set requirements for contractor bids.
+
+::: {.cv-heading}
+[Civil & Structural Engineer, WSP]{.cv-role} [2017 – 2019]{.cv-date}
+:::
+
+- Designed structures for a deep-tunnel train station in SAP2000 and Prokon, adapting designs to on-site conditions.
+::::
+
+:::: {.cv-section}
+
+## Key Skills
+
+::: {.cv-skills}
+- **Data analysis (R):** Data cleaning, EDA, statistics
+- **Visualisation (R):** ggplot2, Shiny apps
+- **Other R:** text mining, package development
+- **Other tools:** Python, SQL (MySQL), Excel
+:::
+::::

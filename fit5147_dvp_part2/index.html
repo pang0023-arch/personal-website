@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Affordability of Resale HDB in Singapore</title>
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+<script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
+
+<body>
+
+  <!-- ═══ SECTION 1: Title ═══ -->
+  <section id="s1" class="full-screen">
+    <div class="intro-content">
+      <p class="intro-label">Singapore Housing</p>
+      <h1 class="intro-title">Is a Resale HDB<br>Still Within Reach?</h1>
+      
+      <p class="intro-sub">
+        Resale flat prices have surged since 2020.<br>
+        This is the story of how much they've risen, where, and whether 
+        young Singaporeans can still afford to buy.
+        </p>
+         
+      </p>
+      <div class="scroll-cue">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow">↓</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 2: Choropleth Map ═══ -->
+  <section id="s2" class="scroll-section">
+
+    <!-- LEFT: sticky map -->
+    <div class="sticky-graphic" id="s2-graphic">
+        <div style="position: absolute; top: 1.5rem; left: 1.5rem; z-index: 10;">
+        <h2 style="font-family: var(--font); color: var(--red-dark); 
+                font-size: clamp(1rem, 2vw, 1.8rem); font-weight: 700;">
+          Where did prices rise the most?
+        </h2>
+    </div>
+    <svg id="map-svg"></svg>
+      <div id="map-reset-btn-wrap">
+        <button id="explore-reset-btn" style="display:none;">↺ Reset filters</button>
+      </div>
+      <div id="year-slider-wrap">
+        <div id="year-ticks">
+          <span class="year-tick" data-year="2021">2021</span>
+          <span class="year-tick" data-year="2022">2022</span>
+          <span class="year-tick" data-year="2023">2023</span>
+          <span class="year-tick" data-year="2024">2024</span>
+          <span class="year-tick active" data-year="2025">2025</span>
+        </div>
+        <input type="range" id="year-slider" min="2021" max="2025" step="1" value="2025">
+      </div>
+      <div id="ft-selector-wrap">
+        <div id="ft-selector"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: scroll steps + explore panel -->
+    <div class="scroll-steps" id="s2-steps">
+
+        <!-- Narrative steps 0–4 -->
+        <div class="step" data-section="2" data-step="0">
+            <div class="step-card">
+                <h2>2021: Prices begin rising</h2>
+                <p>After the Covid lull in 2020, Singapore's resale HDB market woke up. 
+                   Nationally, median prices increased 10% but the heat did not spread evenly.
+                   Mature estates close to the city centre surged the most - Outram (52%), 
+                   Toa Payoh (30%) and Geylang (26%).
+                </p>
+                <p> Much of this was driven by flats similar to The Pinnacle @ Duxton, which made 
+                    headlines for breaking the million-dollar mark. This was deemed as a value-buy
+                    as it would mean owning a place in the city fringe at roughly
+                    <a href="https://www.propertyguru.com.sg/property-guides/pinnacle-at-duxton-vs-cbd-hdb-flats-and-condos-50769"
+                        target="_blank"
+                        style="color: var(--red); text-decoration: underline;">
+                     half the price of a nearby private condo.
+                    </a>
+                </p>
+
+            </div>
+        </div>
+
+        <div class="step" data-section="2" data-step="1">
+            <div class="step-card">
+                <h2>2022: The heat spreads outward</h2>
+                    <p>Prices rose another 11% nationally. While 
+                    city-fringe estates like Kallang (47%), Toa Payoh (42%) and Outram (39%) 
+                    stayed hot, the surge began spreading to towns further out. Woodlands (30%), 
+                    Sembawang (31%) and Bukit Batok (32%) nearly doubled their gains from 2021.
+                    </p>
+                    <p><em>Why?</em> Buyers priced out of mature estates turned to 
+                    <a href="https://www.edgeprop.sg/property-news/cooling-measures-dampen-hdb-home-buyers%E2%80%99-enthusiasm"
+                    target="_blank"
+                    style="color: var(--red); text-decoration: underline;">
+                    more affordable towns further from the city,
+                    </a> and those who couldn't stomach the long 
+                    <a href="http://nlb.gov.sg/main/article-detail?cmsuuid=d33acabb-a341-460c-8fde-99cf0a9270f4"
+                       target="_blank"
+                       style="color: var(--red); text-decoration: underline;">
+                      <abbr title="Build-To-Order (BTO) subsidised public housing flats sold directly by HDB to eligible Singaporeans. Buyers ballot for a flat and typically wait 3–5 years for it to be built and ready for collection."
+                            style="border-bottom: none; cursor: pointer; text-decoration: none;">
+                        Build-To-Order (BTO)
+                      </abbr>
+                    </a>
+                    wait times flooded to
+                    the resale market.
+                    </p>
+                    <p>In September 2022, the government stepped in with cooling measures like the 15-month wait-out period for private property owners
+                        looking to buy resale HDB. Despite temporarily removing cash-rich downgraders from the market, prices kept climbing.
+                    </p>
+            </div>
+        </div>
+
+       <div class="step" data-section="2" data-step="2">
+            <div class="step-card">
+                <h2>2023: Cooling measures effective, but not everywhere</h2>
+                <p>The September 2022 measures seemed to work in city-fringe towns. 
+                    Toa Payoh's cumulative gain slowed by 6% from the previous year, 
+                    and Kallang by 18%. Prices were still high, but the rate of increase 
+                    was finally easing.
+                </p>
+                <p>Yet, Bukit Batok bucked the trend with a 23% YoY surge. 
+                    <p><em>Why?</em> A wave of 
+                    flats reached their 
+                    <a href="https://www.mas.gov.sg/regulation/explainers/new-housing-loans/msr-and-tdsr-rules"
+                       target="_blank"
+                       style="color: var(--red); text-decoration: underline;">
+                      <abbr title="Minimum Occupation Period is the 5-year period HDB flat owners must live in their flat before selling it on the resale market"
+                            style="border-bottom: none; cursor: pointer; text-decoration: none;">
+                        Minimum Occupation Period (MOP)
+                      </abbr>
+                    </a>
+                    in 2023, flooding the market with new supply in the West of Singapore. 
+                    <a href="https://stackedhomes.com/41-upcoming-hdb-bto-projects-reaching-mop-in-2023-24-heres-where-to-find-them/#sh.rt11lg"
+                    target="_blank"
+                    style="color: var(--red); text-decoration: underline;">
+                    Over 2,700 units hit MOP in Bukit Batok alone 
+                    </a>, the most of any town that year.</p>
+                </p>
+                <p>These freshly MOP-ed 
+                <abbr title="Build-To-Order — subsidised public housing flats sold by HDB directly to eligible Singaporeans, 
+                typically completed 3–5 years after balloting">BTO</abbr> 
+                flats often cost more than older resale flats in the same area due to rising BTO launch prices, sellers command 
+                a premium and buyers pay it willingly for the <a href="https://www.propertyguru.com.sg/property-guides/mop-hdb-resale-flats-43364"
+                target="_blank"
+                style="color: var(--red); text-decoration: underline;">longer remaining lease. </a>
+                </p>
+                <p>In Bukit Batok, this new supply met with strong demand, 
+                pushing prices up even as cooling measures slowed the rest of the market.
+                </p>
+            </div>
+        </div>
+
+        <div class="step" data-section="2" data-step="3">
+            <div class="step-card">
+                <h2>2024: Demand returns to city fringe</h2>
+                 <p>National median prices grew a modest 6% — a sign that the market 
+                    was cooling broadly. Bukit Batok, which surged in 2023, saw growth 
+                    flatline to nearly 0% as the wave of MOP supply was absorbed.
+                </p>
+                <p>But city-fringe towns bounced back. Toa Payoh jumped 34%, while Kallang and 
+                    Geylang each rose around 19% from the previous year. 
+                </p>
+                <p><em>Why the reversal? </em>
+                    As prices in outer towns climbed through 2022 and 2023, the price gap 
+                    with city-fringe estates narrowed making the premium feel worth it 
+                    again. With 
+                    <a href="https://stackedhomes.com/41-upcoming-hdb-bto-projects-reaching-mop-in-2023-24-heres-where-to-find-them/#sh.rt11lg"
+                    target="_blank"
+                    style="color: var(--red); text-decoration: underline;">
+                    nearly 2,200 freshly MOPed units
+                    </a> entering the market in Toa Payoh, Kallang and Geylang, 
+                    this was the supply that buyers had been waiting for.
+                </p>
+            </div>
+        </div>
+
+        <div class="step" data-section="2" data-step="4">
+            <div class="step-card">
+                <h2>2025: Record highs, unmoved by cooling measures</h2>
+                <p>In August 2024, the government introduced another round of cooling 
+                    measures. Yet national median prices still rose 8% in 2025, 
+                    suggesting that underlying demand remains resilient.
+                </p>
+                <p>Toa Payoh surged 49% from 2024, and Queenstown rose 21%. The pattern 
+                    from 2024 continued. City-fringe estates with fresh MOP supply attracted 
+                    the strongest demand. Alkaff CourtView alone brought
+                    <a href="https://ohmyhome.com/en-sg/blog/complete-2025-hdb-mop-guide-bto-flats-set-to-hit-the-resale-market/"
+                    target="_blank"
+                    style="color: var(--red); text-decoration: underline;">1,258</a> newly MOPed 
+                    units to Toa Payoh, while Skyparc @ Dawson added <a href="https://ohmyhome.com/en-sg/blog/complete-2025-hdb-mop-guide-bto-flats-set-to-hit-the-resale-market/"
+                    target="_blank"
+                    style="color: var(--red); text-decoration: underline;">810</a>  units to Queenstown.
+                </p>
+                <p>Five years on from 2020, few towns have been spared. But the question 
+                    remains — have incomes kept up with prices?
+                </p>
+            </div>
+        </div>
+
+        <!-- Step 5: sticky explore panel -->
+        <div class="step" data-section="2" data-step="5" id="explore-step">
+            <div id="explore-panel">
+
+                <div class="step-card" id="explore-card">
+                    <h2 id="explore-title">Where do you want to live?</h2>
+                    <p id="explore-desc">Click any town on the map to explore its transaction volume and price movement over time.</p>
+                    <p style="margin-top:0.4rem;font-size:1.0rem;color:#888">Use the flat type buttons and year slider to filter.</p>
+                </div>
+
+                <div id="explore-charts">
+                    <div id="chart-volume"></div>
+                    <div id="chart-price"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="explore-scroll-cue" style="display:none;">
+      <p>Prices have risen, but have incomes kept up?</p>
+      <div class="scroll-arrow">↓</div>
+    </div>
+
+  </section>
+
+    <!-- ═══ SECTION 3: Affordability ═══ -->
+  <section id="s3">
+
+    <!-- Title/hook bar -->
+    <div id="s3-header">
+      <h2 id="s3-title">Can young Singaporeans actually afford this?</h2>
+      <p id="s3-hook">Prices have risen sharply, but so have incomes. Can a young Singaporean couple actually afford a resale flat today?
+        Select your age band, flat type and town to find out.
+      </p>
+
+    </div>
+
+    <!-- Filters -->
+    <div id="s3-controls">
+      <div id="s3-age-selector">
+        <button class="s3-age-btn active" data-age="25-29">Age 25–29</button>
+        <button class="s3-age-btn" data-age="30-34">Age 30–34</button>
+      </div>
+      <div id="s3-ft-selector"></div>
+      <div id="s3-town-selector">
+        <select id="s3-town-dropdown">
+          <option value="ALL">All towns</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Two column body -->
+    <div id="s3-body">
+
+      <!-- LEFT COLUMN -->
+      <div id="s3-left">
+        <div id="s3-linechart"></div>
+        <div id="s3-affordability-explainer">
+          <strong style="font-family: var(--font); color: var(--red-dark); 
+                 font-size: 0.95rem; margin-right: 12px;">
+            Affordability Gap per Year
+          </strong>
+          <span>Affordability = Max purchasing power − Median resale price.</span>
+          <span style="display:inline-flex; align-items:center; gap:4px; 
+               margin-left:12px; font-size:0.75rem; white-space:nowrap;">
+          <span style="width:12px; height:12px; background:#514A2E; 
+                border-radius:2px; display:inline-block;"></span> Affordable
+          <span style="width:12px; height:12px; background:#8B3B36; 
+                 border-radius:2px; display:inline-block; margin-left:8px;"></span> Unaffordable
+          </span>
+        </div>
+        <div id="s3-diverging"></div>
+      </div>
+
+    </div>
+
+   <!-- RIGHT COLUMN — outside s3-body so it can start from top of section -->
+<div id="s3-right">
+  <div id="s3-assumptions">
+  <h3>How to read this section</h3>
+  <p style="margin-top: 0.5rem;">
+  Start with the chart on the top left <em>Price vs Purchasing Power over time </em>
+  to see whether your income band kept up with rising prices over time. 
+  Then look at the bottom left chart <em>Affordability Gap per Year</em>  to see 
+  by how much your affordability changed year on year. Finally, bottom right chart
+  <em>The Hidden Burden: Cash and CPF Required</em> shows 
+  why buying a resale flat feels so much harder today than it did 
+  5 years ago, even when the numbers on paper suggest otherwise.
+  </p>
+  <h3 style="margin-top: 0.5rem;">How is this calculated?</h3>
+  <p>We assume a couple with dual income, since singles under 35 are not 
+    eligible to buy resale HDB. Median income by age band is sourced from 
+    <a href="https://stats.mom.gov.sg/Pages/Labour-Force-In-Singapore-2025.aspx"
+       target="_blank" 
+       style="color: var(--red); text-decoration: underline;">MOM data</a>. 
+    A couple's combined income is taken as twice the individual age-group 
+    median, assuming both partners fall within the same age band. This is 
+    used to derive the maximum loan based on a 
+    <a href="https://www.mas.gov.sg/regulation/explainers/new-housing-loans/msr-and-tdsr-rules"
+       target="_blank"
+       style="color: var(--red); text-decoration: underline;">
+      <abbr title="Mortgage Servicing Ratio (MSR) MAS rule that caps your monthly mortgage repayment at 30% of your gross monthly income. 
+                    This limits how much you can borrow based on your salary."
+                    style="border-bottom: none; cursor: pointer; text-decoration: none;">
+        Mortgage Servicing Ratio (MSR)
+      </abbr>
+    </a>
+    of 30% of gross income. We do not account for housing grants 
+    as eligibility varies on a case by case basis.
+  </p>
+
+  <p style="margin-top: 0.5rem;">
+    Max monthly mortgage is capped at 30% of combined gross income (MSR). 
+    This is converted to a maximum loan amount using a standard annuity 
+    formula over 25 years. Loan parameters reflect successive cooling 
+    measures — the stress test rate increased from 3.5% to 4% in September 
+    2022, while the 
+    <a href="https://www.mas.gov.sg/regulation/explainers/new-housing-loans/msr-and-tdsr-rules"
+       target="_blank"
+       style="color: var(--red); text-decoration: underline;">
+      <abbr title="Loan-to-Value (LTV) is the maximum percentage of the property price that a bank or HDB will lend you. A lower LTV means you must pay more upfront from cash and CPF savings."
+            style="border-bottom: none; cursor: pointer; text-decoration: none;">
+        Loan-to-Value (LTV)
+      </abbr>
+    </a>
+    was tightened in three steps: 90% (pre-2021), 
+    85% (December 2021), 80% (September 2022), and 75% (August 2024), 
+    meaning buyers must fund a progressively larger share upfront from 
+    cash and CPF. Max purchasing power = max loan ÷ LTV. The remainder 
+    must be covered by cash and CPF savings.
+  </p>
+
+  <h3 style="margin-top: 0.5rem;">Why does it feel more difficult than it looks?</h3>
+  <p style="margin-top: 0.5rem;">On paper, the numbers look manageable. 
+  Nationally, median resale prices rose 50% from 2020 to 2025, while 
+  borrowing power grew 25% as incomes rose. But successive cooling 
+  measures tightened the LTV from 90% to 75%, meaning buyers must fund 
+  a larger share upfront. While the loan required grew by only 25% 
+  despite a 50% price increase, the cash and 
+  <a href="https://www.cpf.gov.sg/member/home-ownership/using-your-cpf-to-buy-a-home/apply-to-use-cpf-for-your-property"
+   target="_blank"
+   style="color: var(--red); text-decoration: underline;">
+  <abbr title="Central Provident Fund (CPF) is Singapore's mandatory savings scheme. The Ordinary Account (OA) can be
+   used for housing towards the downpayment and monthly mortgage instalments. You can use your full OA balance, up to 
+   the property's purchase price or valuation, whichever is lower. A minimum of $5000 cash must be used for resale HDB."
+        style="border-bottom: none; cursor: pointer; text-decoration: none;">
+    CPF
+  </abbr>
+  </a> 
+  component grew by 
+  <strong>275% from 2020 to 2025</strong> — 
+  <span style="color: var(--red); font-style: italic;">
+    hover over <em>The Hidden Burden Chart below</em> to see the breakdown.
+  </span>
+  </p>
+
+  <h3 style="margin-top: 0.75rem;">Explore your own situation</h3>
+  <p style="margin-top: 0.5rem; font-size: 1rem;">
+    Select your age band, flat type and town above to see how 
+    affordability has changed for you. 
+    <p>Hover over any point on the 
+    charts for exact figures.</p>
+  </p>
+</div>
+
+  <div id="s3-sankey"></div>
+
+</div>
+
+  </section>
+
+  <div class="tooltip" id="map-tooltip"></div>
+
+</body>
+<!-- ═══ SECTION 4: Conclusion & Credits ═══ -->
+<section id="s4">
+
+  <!-- Conclusion -->
+  <h2>Is a resale HDB still within reach?</h2>
+  
+  <p>For couples aged 30–34, purchasing power has broadly kept pace with 
+    rising prices, a resale flat remains technically affordable on paper. 
+    But for younger buyers aged 25–29, 2024 marked a turning point where 
+    median prices exceeded what they could borrow and fund upfront for 
+    the first time since 2020.
+  </p>
+  <p>Beyond the headline numbers, the real squeeze is the upfront cash and 
+    CPF burden up 275% since 2020. Even where affordability technically 
+    holds, the savings required to get through the door have grown far 
+    faster than incomes. Successive cooling measures, while intended to 
+    stabilise prices, have also tightened borrowing limits. This means buyers 
+    must bring more to the table even as prices climb.
+  </p>
+  <p>The resale HDB market remains an aspiration for many young Singaporeans, especially those
+    who simply do not have the luxury to wait for 3-5 years for a BTO flat.
+    But the window is narrowing, and the path to ownership demands more 
+    than it did just five years ago.
+  </p>
+  <p>While we have calculated affordability in a monetary sense, this analysis 
+    only tells part of the story. Singles under 35 are ineligible to purchase 
+    resale HDB flats, leaving an entire group of young Singaporeans without 
+    an equivalent pathway to home ownership. The system as it stands ties 
+    access to public housing to marital status, a structural constraint 
+    that no amount of income growth or cooling measures can address.
+  </p>
+
+  <!-- Credits -->
+  <hr style="border: none; border-top: 1px solid var(--grey-300); 
+              margin-bottom: 2rem;">
+  
+  <h3>Data Sources</h3>
+  <ul>
+    <li>HDB Resale Transaction Data — 
+      <a href="https://data.gov.sg/datasets/d_8b84c4ee58e3cfc0ece0d773c8ca6abc/view"
+         target="_blank">data.gov.sg</a>, 
+      Housing & Development Board (2021–2026)
+    </li>
+    <li>Singapore Planning Area Boundary — 
+      <a href="https://data.gov.sg/datasets/d_2cc750190544007400b2cfd5d7f53209/view"
+         target="_blank">data.gov.sg</a>, 
+      Urban Redevelopment Authority, Master Plan 2025
+    </li>
+    <li>Median Income by Age Band — 
+      <a href="https://stats.mom.gov.sg/Pages/Labour-Force-In-Singapore-2025.aspx"
+         target="_blank">Ministry of Manpower</a>, 
+      Labour Force in Singapore (2020–2025)
+    </li>
+    
+  </ul>
+
+  <h3>References</h3>
+  <ul>
+    <li>Pinnacle @ Duxton vs nearby condos — 
+      <a href="https://www.propertyguru.com.sg/property-guides/pinnacle-at-duxton-vs-cbd-hdb-flats-and-condos-50769"
+         target="_blank">PropertyGuru (2021)</a>
+    </li>
+    <li>Cooling measures and HDB buyer enthusiasm — 
+      <a href="https://www.edgeprop.sg/property-news/cooling-measures-dampen-hdb-home-buyers%E2%80%99-enthusiasm"
+         target="_blank">EdgeProp</a>
+    </li>
+    <li>BTO wait times — 
+      <a href="http://nlb.gov.sg/main/article-detail?cmsuuid=d33acabb-a341-460c-8fde-99cf0a9270f4"
+         target="_blank">National Library Board</a>
+    </li>
+    <li>LTV cooling measures (August 2024) — 
+      <a href="https://www.propertyguru.com.sg/property-guides/singapore-loan-to-value-ratio-guide-12845"
+         target="_blank">PropertyGuru</a>
+    </li>
+    <li>MSR and LTV rules — 
+      <a href="https://www.mas.gov.sg/regulation/explainers/new-housing-loans/msr-and-tdsr-rules"
+         target="_blank">Monetary Authority of Singapore</a>
+    </li>
+    <li>CPF usage for home ownership — 
+      <a href="https://www.cpf.gov.sg/member/home-ownership/using-your-cpf-to-buy-a-home/apply-to-use-cpf-for-your-property"
+         target="_blank">CPF Board</a>
+    </li>
+    <li>MOP Data (2023) — 
+      <a href="https://stackedhomes.com/41-upcoming-hdb-bto-projects-reaching-mop-in-2023-24-heres-where-to-find-them/#sh.rt11lg"
+         target="_blank">Stacked Homes</a>
+    </li>
+    <li>Why buyers prefer newly MOP flats (2024) — 
+      <a href="https://www.propertyguru.com.sg/property-guides/mop-hdb-resale-flats-43364"
+         target="_blank">PropertyGuru</a>
+    </li>
+    <li>MOP Data (2025) — 
+      <a href="https://ohmyhome.com/en-sg/blog/complete-2025-hdb-mop-guide-bto-flats-set-to-hit-the-resale-market/"
+         target="_blank">Ohmyhome</a>
+    </li>
+  </ul>
+
+  <p style="font-size: 0.75rem; color: #aaa; margin-top: 2rem;">
+    Built with D3.js · Data as of 2025 · Pei Sin Ang 
+  </p>
+
+</section>
+<script src="app.js"></script>
+
+</html>
