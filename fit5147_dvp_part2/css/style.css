@@ -1,0 +1,569 @@
+/* ── Reset & base ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red:       #8B3B36;
+  --red-dark:  #67000d;
+  --red-light: #fee5d9;
+  --grey-100:  #f7f7f7;
+  --grey-300:  #cccccc;
+  --grey-600:  #666666;
+  --text:      #1a1a1a;
+  --white:     #fffff0;
+  --card-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  --font: 'Georgia', serif;
+  --font-sans: system-ui, -apple-system, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: white;
+  overflow-x: hidden;
+}
+
+/* ── Section 1: Full-screen intro ────────────────────────────── */
+.full-screen {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--red-dark);
+  color: var(--white);
+  text-align: center;
+  padding: 2rem;
+}
+
+.intro-content { max-width: 2000px; }
+
+.intro-label {
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+}
+
+.intro-title {
+  font-family: var(--font);
+  font-size: clamp(1.5rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.intro-sub {
+  font-size: 1rem;
+  line-height: 1.7;
+  opacity: 0.85;
+  margin-bottom: 3rem;
+}
+
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.scroll-arrow {
+  font-size: 1rem;
+  animation: bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(30px); }
+}
+
+/* ── Scroll sections: sticky left + steps right ──────────────── */
+.scroll-section {
+  display: flex;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* LEFT pane — sticky graphic */
+.sticky-graphic {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 60%;
+  overflow: hidden;
+  background: white;
+  flex-shrink: 0;
+}
+
+/* RIGHT pane — scroll steps */
+.scroll-steps {
+  width: 40%;
+  padding-top: 50vh;
+  padding-bottom: 10vh;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Individual step cards */
+.step {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+
+.step-card {
+  background: var(--white);
+  border-left: 4px solid var(--red);
+  border-radius: 4px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--card-shadow);
+  width: 95%;
+}
+
+.step-card h2 {
+  font-family: var(--font);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--red-dark);
+}
+
+.step-card p {
+  font-size: 1.0rem;
+  line-height: 1.7;
+  color: var(--grey-600);
+}
+
+/* Active step highlight */
+.step.is-active .step-card {
+  border-left-color: var(--red-dark);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* ── Map SVG (Section 2) ──────────────────────────────────────── */
+#my_dataviz {
+  display: block;
+  width: 100%;
+  height: calc(100% - 120px); /* leave room for controls */
+}
+
+/* Year slider */
+#year-slider-wrap {
+  position: absolute;
+  bottom: 16rem;
+  right: 1.5rem;
+  left: auto;
+  width: 360px;
+}
+
+#year-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--grey-600);
+  margin-bottom: 4px;
+}
+
+.year-tick.active {
+  font-weight: 700;
+  color: var(--red-dark);
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--red);
+  cursor: pointer;
+}
+
+/* Flat type pills */
+#ft-selector-wrap {
+  position: absolute;
+  bottom: 19rem;
+  right: 1.5rem;
+}
+#ft-selector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#ft-selector button {
+  min-width: 52px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1.5px solid var(--red);
+  background: transparent;
+  color: var(--red);
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+#ft-selector button.active {
+  background: var(--red);
+  color: var(--white);
+}
+
+/* ── Tooltip (shared) ────────────────────────────────────────── */
+.tooltip {
+  position: fixed;
+  background: var(--white);
+  border: 1px solid var(--grey-300);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: var(--card-shadow);
+  line-height: 1.5;
+  z-index: 9999;
+  transition: opacity 0.15s;
+}
+
+
+
+/* ── Responsive tweak for smaller screens ────────────────────── */
+@media (max-width: 768px) {
+  .scroll-section { flex-direction: column; }
+  .sticky-graphic { width: 100%; height: 50vh; position: relative; }
+  .scroll-steps   { width: 100%; padding-top: 1rem; padding-bottom: 4rem; }
+}
+
+/* ── Explore panel (step 5) ──────────────────────────────────── */
+#explore-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  width: 95%;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+#explore-step {
+  min-height: unset;
+  align-items: flex-start;
+}
+
+#explore-card {
+  flex-shrink: 0;
+  width: 100%;
+}
+ 
+#explore-header h2 {
+  font-family: var(--font);
+  font-size: 1.5rem;
+  color: var(--red-dark);
+  margin-bottom: 0.25rem;
+}
+ 
+.explore-hint {
+  font-size: 1rem;
+  color: var(--grey-600);
+}
+ 
+#explore-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  min-height: 0;
+}
+ 
+#chart-volume,
+#chart-price {
+  width: 100%;
+  height: 35vh;
+  flex-shrink: 0;
+  background: white;
+  border-radius: 6px;
+  box-shadow: var(--card-shadow);
+  padding: 0.5rem;
+}
+
+/* ── Map reset button (above year slider) ────────────────────── */
+#map-reset-btn-wrap {
+  position: absolute;
+  bottom: calc(19rem + 50px);
+  right: 1.5rem;
+}
+
+#explore-reset-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1.5px solid var(--red);
+  background: transparent;
+  color: var(--red);
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+#explore-reset-btn:hover {
+  background: var(--red);
+  color: white;
+}
+
+/* ── Cue to section 3 ────────────────────── */
+#explore-scroll-cue {
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  color: var(--grey-600);
+  font-size: 0.75rem;
+}
+
+#explore-scroll-cue.visible {
+  opacity: 1;
+}
+
+/* ── Section 3: Affordability ────────────────────────────────── */
+#s3 {
+  padding: 0.75rem 2rem;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#s3-title {
+  font-size: clamp(1rem, 2vw, 1.8rem);
+  font-weight: 700;
+  color: var(--red-dark);
+  margin-bottom: 0.25rem;
+  flex-shrink: 1;
+}
+
+
+#s3-hook {
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  line-height: 1.5;
+  color: var(--grey-600);
+  max-width: 860px;
+  flex-shrink: 1;
+}
+
+/* Controls row */
+#s3-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  row-gap: 0.5rem;
+  width: 47%;
+}
+
+#s3-age-selector {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.s3-age-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1.5px solid var(--red);
+  background: transparent;
+  color: var(--red);
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.s3-age-btn.active {
+  background: var(--red);
+  color: var(--white);
+}
+
+#s3-ft-selector {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+}
+
+#s3-ft-selector button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1.5px solid var(--red);
+  background: transparent;
+  color: var(--red);
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+#s3-ft-selector button.active {
+  background: var(--red);
+  color: var(--white);
+}
+
+#s3-town-dropdown {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1.5px solid var(--grey-300);
+  font-size: 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+#s3-town-dropdown {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1.5px solid var(--grey-300);
+  font-size: 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+  min-width: 0;
+  max-width: 150px;
+}
+/* Two column body */
+#s3-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Left column */
+#s3-left {
+  width: 47%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+#s3-linechart {
+  flex: 5;
+  min-height: 0;
+  margin-bottom: 12px;
+}
+
+#s3-affordability-explainer {
+  flex-shrink: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-size: 0.75rem;
+  color: var(--grey-600);
+  border-top: 1px solid var(--grey-300);
+  border-bottom: 1px solid var(--grey-300);
+}
+
+#s3-diverging {
+  flex: 5;
+  min-height: 0;
+}
+
+/* Right column */
+#s3-right {
+  position: absolute;
+  top: 0.75rem;
+  right: 2rem;
+  width: calc(47% - 1.5rem);
+  height: calc(100% - 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#s3-assumptions {
+  flex: 5;
+  min-height: 0;
+  padding: 1rem;
+  background: var(--grey-100);
+  border-radius: 4px;
+  overflow: auto;
+}
+
+#s3-assumptions h3 {
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--red-dark);
+  margin-bottom: 0.5rem;
+}
+
+#s3-assumptions p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--grey-600);
+}
+
+#s3-sankey {
+  flex: 6;
+  min-height: 0;
+}
+
+/* ── Section 4: Conclusion and credit ────────────────────────────────── */
+
+#s4 {
+  padding: 4rem 2rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+#s4 p {
+  line-height: 1.8;
+  color: var(--grey-600);
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+#s4 h2 {
+  font-family: var(--font);
+  color: var(--red-dark);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  margin-bottom: 1rem;
+}
+
+#s4 h3 {
+  font-family: var(--font);
+  color: var(--red-dark);
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+#s4 ul {
+  font-size: 0.8rem;
+  color: var(--grey-600);
+  line-height: 2;
+  list-style: none;
+  padding: 0;
+}
+
+#s4 ul a {
+  color: var(--red);
+}

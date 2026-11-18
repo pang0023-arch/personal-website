@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Is a resale HDB still affordable?\n\n\nDrawing on my experience as a real estate advisor, I built an interactive D3 scrollytelling story on whether young Singaporeans can still afford a resale flat. The answer depends less on the monthly loan than on the cash needed upfront.\n\n\n\n\n\nJun 5, 2026\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "Peisin Ang",
+    "section": "",
+    "text": "Download PDF"
+  },
+  {
+    "objectID": "cv.html#summary",
+    "href": "cv.html#summary",
+    "title": "Peisin Ang",
+    "section": "Summary",
+    "text": "Summary\nI spent four years as a civil engineer and four years advising property investors, and along the way I noticed the best decisions were the ones backed by data. That led me to a Master of Business Analytics, where I’m building technical expertise in exploring, analysing and visualising data in R. Now I want to pair it with the business acumen and client communication skills I’ve developed over eight years of work."
+  },
+  {
+    "objectID": "cv.html#education",
+    "href": "cv.html#education",
+    "title": "Peisin Ang",
+    "section": "Education",
+    "text": "Education\n\nMaster of Business Analytics, Monash University 2026 – Present\n\n\nGraduate Diploma in Foundational Data Science, University of Melbourne 2025\n\n\nB.Eng. (Civil Engineering) with Honours, National University of Singapore 2017"
+  },
+  {
+    "objectID": "cv.html#projects-achievements",
+    "href": "cv.html#projects-achievements",
+    "title": "Peisin Ang",
+    "section": "Projects & Achievements",
+    "text": "Projects & Achievements\n\n2nd Place (of 9 teams), MBAT × SEC Victoria Datathon 2026\n\n\nText-mined 1,161 AI incidents in R (TF-IDF, LDA topic modelling, bigrams) to identify how AI tools fail in retail, wholesale and household electrification work.\nTranslated findings into six safeguards for SEC Victoria’s internal AI rollout."
+  },
+  {
+    "objectID": "cv.html#work-experience",
+    "href": "cv.html#work-experience",
+    "title": "Peisin Ang",
+    "section": "Work Experience",
+    "text": "Work Experience\n\nAssociate Director, PropNex Realty Pte Ltd 2022 – Present\n\n\nAnalysed transaction data, price trends and financials (capital growth, rental yield, holding costs) to advise clients on whether to buy, sell or hold.\nOptimised clients’ property portfolios to maximise investment potential, assessing risks such as market volatility, tenant turnover and economic downturns.\n\n\nExecutive Engineer, Land Transport Authority Singapore 2020 – 2022\n\n\nManaged inventory data for Singapore’s road assets (pavement, signals, signage, markings) to plan preventive and reactive maintenance.\nForecast maintenance costs to set requirements for contractor bids.\n\n\nCivil & Structural Engineer, WSP 2017 – 2019\n\n\nDesigned structures for a deep-tunnel train station in SAP2000 and Prokon, adapting designs to on-site conditions."
+  },
+  {
+    "objectID": "cv.html#key-skills",
+    "href": "cv.html#key-skills",
+    "title": "Peisin Ang",
+    "section": "Key Skills",
+    "text": "Key Skills\n\n\nData analysis (R): Data cleaning, EDA, statistics\nVisualisation (R): ggplot2, Shiny apps\nOther R: text mining, package development\nOther tools: Python, SQL (MySQL), Excel"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Pei Sin Ang",
+    "section": "",
+    "text": "I’m a first-year student in the Master of Business Analytics at Monash University, coming to data from a slightly unusual path.\nI spent four years as a civil engineer and the last four advising property investors with PropNex Singapore. Most people in the industry approach it as sales, but I found myself drawn to the data side of things, and that’s where I found my style. I compare developments, look at the numbers behind supply and demand, and help clients decide whether to buy, sell or hold, and how to optimise their portfolios. A big part of the job is turning those numbers into something clients can easily understand and act on. The more I worked with data, the more I wanted the technical skills to do it properly, and that’s what brought me to analytics.\nThese days I’m learning to explore, analyse and visualise data in R, and this site is where I share what I’m working on."
+  },
+  {
+    "objectID": "blogpost/dvp_story/index.html",
+    "href": "blogpost/dvp_story/index.html",
+    "title": "Is a resale HDB still affordable?",
+    "section": "",
+    "text": "Read the interactive story →"
+  },
+  {
+    "objectID": "blogpost/dvp_story/index.html#why-i-made-this",
+    "href": "blogpost/dvp_story/index.html#why-i-made-this",
+    "title": "Is a resale HDB still affordable?",
+    "section": "Why I made this",
+    "text": "Why I made this\nAs a real estate advisor in Singapore, I saw firsthand how quickly resale HDB prices were climbing, and how much harder it was getting for young Singaporeans hoping to own a home. HDB flats are subsidised public housing. Even though resale flats are bought and sold on the open market, the whole system exists to keep housing affordable. So when prices kept rising, I wanted to know whether it was still doing that job. This project brings together my experience in the field and my newfound analytics skills: I used HDB transaction and income data from 2020 to 2025 to test what I’d seen on the ground, and turned it into a story anyone could follow."
+  },
+  {
+    "objectID": "blogpost/dvp_story/index.html#what-i-found",
+    "href": "blogpost/dvp_story/index.html#what-i-found",
+    "title": "Is a resale HDB still affordable?",
+    "section": "What I found",
+    "text": "What I found\nFrom 2020 to 2025, median resale prices rose about 50% nationally, and much more in some towns (Toa Payoh: +119%). The bigger surprise was that the loan buyers needed grew only about 25%, while the cash and CPF needed upfront grew 275%, because cooling measures tightened loan limits. Many young buyers aren’t priced out by monthly repayments. They’re priced out by the money they need up front."
+  },
+  {
+    "objectID": "blogpost/dvp_story/index.html#how-i-designed-it",
+    "href": "blogpost/dvp_story/index.html#how-i-designed-it",
+    "title": "Is a resale HDB still affordable?",
+    "section": "How I designed it",
+    "text": "How I designed it\nI sketched 19 ideas and three full alternative designs (a map, a treemap and a bubble chart) before writing any code. Each one taught me something about what my audience could and couldn’t read.\n\n\n\n\n\n\nFirst sketches: 19 ideas\n\n\n\n\n\n\n\nFinal design\n\n\n\n\n\nA few decisions shaped the final piece:\n\nGuided, then free to explore. The map updates year by year as you scroll, then hands control to you. That way readers get the context before they’re asked to read the data on their own.\nTwo charts answer two questions. A diverging bar chart answers “Can I afford it?” A Sankey chart answers “Why does it feel harder than the numbers suggest?” Instead of the usual price-to-income ratio, I measured affordability the way a real purchase works: how much a buyer can borrow, and how much they must pay upfront in cash and CPF.\nReal data vs my estimates. Actual resale prices are drawn as a solid line. Purchasing power, which I calculated from income and loan rules, is drawn as a dotted line, so readers can tell what’s measured and what’s estimated.\n\nBuilt with: R for data cleaning, then D3.js, d3-sankey and Scrollama. The data comes from HDB, the Ministry of Manpower and URA."
+  },
+  {
+    "objectID": "blogpost/dvp_story/index.html#what-id-improve",
+    "href": "blogpost/dvp_story/index.html#what-id-improve",
+    "title": "Is a resale HDB still affordable?",
+    "section": "What I’d improve",
+    "text": "What I’d improve\n\nShow the range, not just the median. My affordability chart compares one median price with one estimated purchasing power, but real buyers can vary. My data exploration and statistics modules in semester 2 taught me that a single number can hide this spread. A shaded band showing the typical range of incomes and prices would show who can comfortably afford a flat and who is borderline.\nLook ahead. Adding price and income projections would let me ask “When might it become out of reach?”\n\nExplore the full interactive story →"
+  }
+]
